@@ -1,0 +1,58 @@
+[
+  {
+    "file": "call-20261020-0912.mp3",
+    "scenario": "Billing dispute, resolved. Agent callback, so the customer speaks first.",
+    "upload": true,
+    "voices": {
+      "agent": "Samantha",
+      "customer": "Daniel"
+    },
+    "expected": {
+      "call_reason": "billing",
+      "resolution_status": "resolved",
+      "agent_speaker_id": "2"
+    }
+  },
+  {
+    "file": "call-20261020-1047.mp3",
+    "scenario": "Fibre outage, escalated to network operations with a technician visit and a service credit.",
+    "upload": true,
+    "voices": {
+      "agent": "Rishi",
+      "customer": "Karen"
+    },
+    "expected": {
+      "call_reason": "technical_issue",
+      "resolution_status": "escalated",
+      "agent_speaker_id": "1"
+    }
+  },
+  {
+    "file": "call-20261020-1405.mp3",
+    "scenario": "Cancellation after repeated outages and price rises; retention offer declined, cancellation booked.",
+    "upload": true,
+    "voices": {
+      "agent": "Moira",
+      "customer": "Aman"
+    },
+    "expected": {
+      "call_reason": "cancellation",
+      "resolution_status": "resolved",
+      "agent_speaker_id": "1"
+    }
+  },
+  {
+    "file": "call-20261020-1530.mp3",
+    "scenario": "Spare for the live upload: happy customer upgrades to a family bundle (sales, resolved).",
+    "upload": false,
+    "voices": {
+      "agent": "Tessa",
+      "customer": "Rishi"
+    },
+    "expected": {
+      "call_reason": "sales",
+      "resolution_status": "resolved",
+      "agent_speaker_id": "1"
+    }
+  }
+]

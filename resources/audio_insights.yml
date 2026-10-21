@@ -1,0 +1,35 @@
+resources:
+  schemas:
+    audio_insights_schema:
+      catalog_name: ${var.catalog}
+      name: ${var.schema}
+      comment: Audio insights demo - transcripts and call insights from ai_transcribe, ai_extract and ai_analyze_sentiment.
+
+  volumes:
+    raw_audio:
+      catalog_name: ${var.catalog}
+      schema_name: ${resources.schemas.audio_insights_schema.name}
+      name: raw_audio
+      volume_type: MANAGED
+      comment: Drop audio files (mp3, wav, flac, opus, m4a; lower- or upper-case extension) here, in any subfolder. Each new file is transcribed once.
+
+  pipelines:
+    audio_insights:
+      # The catalog and schema in the name keep it unique when several users deploy it into the same workspace.
+      name: audio_insights_pipeline (${var.catalog}.${var.schema})
+      catalog: ${var.catalog}
+      schema: ${resources.schemas.audio_insights_schema.name}
+      serverless: true
+      continuous: false
+      development: false
+      channel: CURRENT
+      root_path: ..
+      libraries:
+        - glob:
+            include: ../transformations/**
+      configuration:
+        # Read by transformations/audio_transcripts_raw.sql.
+        audio_path: /Volumes/${var.catalog}/${var.schema}/raw_audio/
+        # Fail fast instead of re-running AI calls when an update fails.
+        pipelines.numUpdateRetryAttempts: "0"
+        pipelines.maxFlowRetryAttempts: "0"

@@ -1,0 +1,22 @@
+# Declarative Automation Bundle for the audio insights pipeline (see README.md).
+# Every bundle command needs the catalog: pass --var catalog=<your_catalog> or set BUNDLE_VAR_catalog.
+bundle:
+  name: audio_insights
+
+include:
+  - resources/*.yml
+
+sync:
+  exclude:
+    - samples/**
+
+variables:
+  catalog:
+    description: Existing Unity Catalog catalog to create the demo schema in. Required.
+  schema:
+    description: Name of a NEW schema that the bundle creates and owns. bundle destroy drops it with everything in it.
+    default: audio_insights_demo
+
+targets:
+  default:
+    default: true
